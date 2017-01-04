@@ -57,4 +57,17 @@ public class ListDBHelper extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
+
+    // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
+    public void addListObject(ListObject pListObject) {
+
+    }
+    public ListObject getListObject(int pListObjectKey) {
+        ListObject rListObject =new ListObject();
+
+        return rListObject;
+    }
+    public void removeListObject(int pListObjectKey) {
+
+    }
 }
