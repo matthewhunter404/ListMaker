@@ -18,7 +18,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "ListMakerDB";
 
-    // The names of thwe two main Tables
+    // The names of the two main Tables
     private static final String TABLE_LIST_OBJECTS = "ListMakerObjects";
     private static final String TABLE_LIST_ITEMS = "ListMakerItems";
 
@@ -51,7 +51,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Currently the OnUpgrade will simply drop older table if existed.
-        //TODO: Gain a better understaading of under what circumstances onUpgrade is called and how to implimemnt this such that user data is retained even on a database update.
+        //TODO: Gain a better understanding of under what circumstances onUpgrade is called and how to implement this such that user data is retained even on a database update.
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LIST_OBJECTS );
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LIST_ITEMS);
         // Create tables again

@@ -7,12 +7,12 @@ import java.util.ArrayList;
  */
 public class ListObject {
     private String listName; //The lists name
-    private int UniqueID; // A unique ID to ensure that this List is unique, this is the main ID handle the program will have on the object as list names don't need to be unique.
+    private int uniqueID; // A unique ID to ensure that this List is unique, this is the main ID handle the program will have on the object as list names don't need to be unique.
     private ArrayList<ListItem> listItemsArray;
 
     public ListObject(){
         listName="";
-        UniqueID=0;
+        uniqueID=0;
         listItemsArray=new ArrayList();
     }
     public String getListObjectName(){
@@ -22,10 +22,10 @@ public class ListObject {
         listName=pListObjectName;
     }
     public int getUniqueID(){
-        return UniqueID;
+        return uniqueID;
     }
 
     public void setUniqueID(int pUniqueID){
-        UniqueID=pUniqueID;
+        uniqueID=pUniqueID;
     }
 }
