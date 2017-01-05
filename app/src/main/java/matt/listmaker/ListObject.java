@@ -15,6 +15,13 @@ public class ListObject {
         uniqueID=0;
         listItemsArray=new ArrayList();
     }
+
+    public ListObject(String pName, int pUniqueID, ArrayList pArrayList){
+        listName=pName;
+        uniqueID=pUniqueID;
+        listItemsArray=pArrayList;
+    }
+
     public String getListObjectName(){
         return listName;
     }
