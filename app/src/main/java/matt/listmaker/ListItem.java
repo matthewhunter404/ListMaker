@@ -7,6 +7,12 @@ public class ListItem {
     private String itemText; //The items text
     private int keyID; //this links this list item to the unique ID of a list
 
+
+    public ListItem() {
+        itemText="";
+        keyID=0;
+    }
+
     public ListItem(String pText, int pkeyID) {
         itemText=pText;
         keyID=pkeyID;
