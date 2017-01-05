@@ -60,7 +60,8 @@ public class ListDBHelper extends SQLiteOpenHelper {
     //TODO:Implement these:
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListObject(ListObject pListObject) {
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("INSERT INTO "+ TABLE_LIST_OBJECTS +"("+ KEY_LIST_ID +","+ KEY_NAME+") VALUES("+pListObject.getUniqueID()+","+pListObject.getListObjectName()+")");
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
     public ListObject getListObject(int pListObjectKey) {
