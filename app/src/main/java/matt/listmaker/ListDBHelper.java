@@ -38,13 +38,13 @@ public class ListDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Create ListMakerObjects
-        String CREATE_PICASSO_TABLE = "CREATE TABLE " + TABLE_LIST_OBJECTS + "("
+        String CREATE_LIST_TABLE = "CREATE TABLE " + TABLE_LIST_OBJECTS + "("
                 + KEY_LIST_ID  + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" +")";
-        db.execSQL(CREATE_PICASSO_TABLE);
+        db.execSQL(CREATE_LIST_TABLE);
         //Create CommentTable
-        String CREATE_TABLE_COMMENTS = "CREATE TABLE " + TABLE_LIST_ITEMS + "("
+        String CREATE_ITEM_TABLE = "CREATE TABLE " + TABLE_LIST_ITEMS + "("
                 + KEY_ITEM_ID + " INTEGER PRIMARY KEY,"+ KEY_TEXT + " TEXT" +")";
-        db.execSQL(CREATE_TABLE_COMMENTS);
+        db.execSQL(CREATE_ITEM_TABLE);
     }
 
     // Upgrading database
