@@ -80,7 +80,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
     public ListItem getListItem(int pListItemKey) {
-        ListObject rListItem =new ListItem();
+        ListItem rListItem =new ListItem();
 
         return rListItem;
     }
