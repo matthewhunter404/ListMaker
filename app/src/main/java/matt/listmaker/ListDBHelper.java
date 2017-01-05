@@ -71,7 +71,8 @@ public class ListDBHelper extends SQLiteOpenHelper {
     }
     // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
     public void removeListObject(int pListObjectKey) {
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_LIST_OBJECTS + " WHERE " + KEY_LIST_ID + "=" + pListObjectKey);
     }
 
     //TODO:Implement these:
