@@ -35,4 +35,12 @@ public class ListObject {
     public void setUniqueID(int pUniqueID){
         uniqueID=pUniqueID;
     }
+
+    public ArrayList getlistItemsArray(){
+        return listItemsArray;
+    }
+
+    public void setlistItemsArray(ArrayList pArrayList){
+        listItemsArray=pArrayList;
+    }
 }
