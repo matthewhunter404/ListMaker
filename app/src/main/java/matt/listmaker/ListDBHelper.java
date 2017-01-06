@@ -71,6 +71,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_LIST_OBJECTS, new String[]{KEY_LIST_ID,KEY_NAME}, KEY_LIST_ID+ "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
         rListObject.setUniqueID(pListObjectKey); //alternately rListObject.setUniqueID(cursor.getInt(cursor.getColumnIndex(KEY_LIST_ID))); could be used
         rListObject.setListObjectName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));//"getColumnIndex" is more programming cycles than hardcodng in values, but hopefully will make the code my dynamic and bug-resistant.
+        //TODO:Call getListItem and fill in ListItemArray.
         return rListObject;
     }
     // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
