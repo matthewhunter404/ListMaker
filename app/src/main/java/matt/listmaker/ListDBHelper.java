@@ -68,7 +68,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
     public ListObject getListObject(int pListObjectKey) {
         ListObject rListObject =new ListObject();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_LIST_OBJECTS, new String[]{KEY_LIST_ID}, KEY_LIST_ID+ "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
+        Cursor cursor = db.query(TABLE_LIST_OBJECTS, new String[]{KEY_LIST_ID,KEY_NAME}, KEY_LIST_ID+ "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
         return rListObject;
     }
     // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
