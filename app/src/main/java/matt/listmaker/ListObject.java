@@ -36,11 +36,16 @@ public class ListObject {
         uniqueID=pUniqueID;
     }
 
-    public ArrayList getlistItemsArray(){
+    public ArrayList getListItemsArray(){
         return listItemsArray;
     }
-
-    public void setlistItemsArray(ArrayList pArrayList){
+    public void setListItemsArray(ArrayList pArrayList){
         listItemsArray=pArrayList;
+    }
+    public ListItem getListItem(int pPosition){
+        return listItemsArray.get(pPosition);
+    }
+    public void addListItem(ListItem pListItem){
+        listItemsArray.add(pListItem);
     }
 }
