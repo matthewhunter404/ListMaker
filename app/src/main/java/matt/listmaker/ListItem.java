@@ -5,17 +5,19 @@ package matt.listmaker;
  */
 public class ListItem {
     private String itemText; //The items text
-    private int keyID; //this links this list item to the unique ID of a list
-
+    private int linkID; //this links this list item to the unique ID of a list
+    private int uniqueID; // A unique ID to ensure that this Item is unique, this is the main ID handle the program will have on each Item.
 
     public ListItem() {
         itemText="";
-        keyID=0;
+        linkID=0;
+        uniqueID=0;
     }
 
-    public ListItem(String pText, int pkeyID) {
+    public ListItem(int pUniqueID,String pText, int pkeyID) {
+        uniqueID=pUniqueID;
         itemText=pText;
-        keyID=pkeyID;
+        linkID=pkeyID;
     }
 
     public void setItemText(String pText) {
@@ -26,12 +28,20 @@ public class ListItem {
         return itemText;
     }
 
-    public void setItemKeyID(int pkeyID) {
-        keyID=pkeyID;
+    public void setItemLinkID(int pLinkID) {
+        linkID=pLinkID;
     }
 
-    public int getItemKeyID(){
-        return keyID;
+    public int getItemLinkID(){
+        return linkID;
+    }
+
+    public void setItemUniqueID(int pUniqueID) {
+        uniqueID=pUniqueID;
+    }
+
+    public int getItemUniqueID(){
+        return uniqueID;
     }
 
 }

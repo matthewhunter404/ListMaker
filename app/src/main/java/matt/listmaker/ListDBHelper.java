@@ -58,7 +58,6 @@ public class ListDBHelper extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
-    //TODO:Implement these:
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListObject(ListObject pListObject) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -80,24 +79,24 @@ public class ListDBHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_LIST_OBJECTS + " WHERE " + KEY_LIST_ID + "=" + pListObjectKey);
     }
 
-    //TODO:Implement these:
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListItem(ListItem pListItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO "+ TABLE_LIST_ITEMS +"("+ KEY_ITEM_ID +","+ KEY_NAME+") VALUES("+pListItem.getItemKeyID()+","+pListItem.getItemText()+")");
+        db.execSQL("INSERT INTO "+ TABLE_LIST_ITEMS +"("+ KEY_ITEM_ID +","+ KEY_NAME+") VALUES("+pListItem.getItemLinkID()+","+pListItem.getItemText()+")");
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
     public ListItem getListItem(int pListItemKey) {
         ListItem rListItem =new ListItem();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_LIST_ITEMS, new String[]{KEY_ITEM_ID,KEY_TEXT}, KEY_ITEM_ID+ "=?", new String[]{Integer.toString(pListItemKey)},null,null,null);
-        rListItem.setItemKeyID(pListItemKey);
+        rListItem.setItemLinkID(pListItemKey);
         rListItem.setItemText(cursor.getString(cursor.getColumnIndex(KEY_TEXT)));
         return rListItem;
     }
     // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
     public void removeListItem(int pListItemKey) {
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_LIST_ITEMS + " WHERE " + KEY_LIST_ID + "=" + pListItemKey);
     }
 
 }
