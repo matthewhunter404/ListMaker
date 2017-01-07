@@ -89,7 +89,10 @@ public class ListDBHelper extends SQLiteOpenHelper {
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
     public ListItem getListItem(int pListItemKey) {
         ListItem rListItem =new ListItem();
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(TABLE_LIST_ITEMS, new String[]{KEY_ITEM_ID,KEY_TEXT}, KEY_ITEM_ID+ "=?", new String[]{Integer.toString(pListItemKey)},null,null,null);
+        rListItem.setItemKeyID(pListItemKey);
+        rListItem.setItemText(cursor.getString(cursor.getColumnIndex(KEY_TEXT)));
         return rListItem;
     }
     // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
