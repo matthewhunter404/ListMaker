@@ -24,11 +24,12 @@ public class ListDBHelper extends SQLiteOpenHelper {
     private static final String TABLE_LIST_ITEMS = "ListMakerItems";
 
     // ListMakerObject Table Columns names
-    private static final String KEY_LIST_ID = "id";
+    private static final String KEY_OBJECT_ID = "id";
     private static final String KEY_NAME = "name";
 
     // ListMakerItem Table Columns names
     private static final String KEY_ITEM_ID = "id";
+    private static final String KEY_ITEM_LIST_ID = "listId";
     private static final String KEY_TEXT = "text";
 
     //______________________________________________________________________________________________
@@ -40,11 +41,11 @@ public class ListDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Create ListMakerObjects
         String CREATE_LIST_TABLE = "CREATE TABLE " + TABLE_LIST_OBJECTS + "("
-                + KEY_LIST_ID  + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" +")";
+                + KEY_OBJECT_ID  + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" +")";
         db.execSQL(CREATE_LIST_TABLE);
         //Create CommentTable
-        String CREATE_ITEM_TABLE = "CREATE TABLE " + TABLE_LIST_ITEMS + "("
-                + KEY_ITEM_ID + " INTEGER PRIMARY KEY,"+ KEY_TEXT + " TEXT" +")";
+        String CREATE_ITEM_TABLE = "CREATE TABLE " + TABLE_LIST_ITEMS + "("+ KEY_ITEM_ID+ " INTEGER PRIMARY KEY,"
+                + KEY_ITEM_LIST_ID + " INT,"+ KEY_TEXT + " TEXT" +")";
         db.execSQL(CREATE_ITEM_TABLE);
     }
 
@@ -61,13 +62,13 @@ public class ListDBHelper extends SQLiteOpenHelper {
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListObject(ListObject pListObject) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO "+ TABLE_LIST_OBJECTS +"("+ KEY_LIST_ID +","+ KEY_NAME+") VALUES("+pListObject.getUniqueID()+","+pListObject.getListObjectName()+")");
+        db.execSQL("INSERT INTO "+ TABLE_LIST_OBJECTS +"("+ KEY_OBJECT_ID +","+ KEY_NAME+") VALUES("+pListObject.getUniqueID()+","+pListObject.getListObjectName()+")");
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
     public ListObject getListObject(int pListObjectKey) {
         ListObject rListObject =new ListObject();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_LIST_OBJECTS, new String[]{KEY_LIST_ID,KEY_NAME}, KEY_LIST_ID+ "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
+        Cursor cursor = db.query(TABLE_LIST_OBJECTS, new String[]{KEY_OBJECT_ID,KEY_NAME}, KEY_OBJECT_ID+ "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
         rListObject.setUniqueID(pListObjectKey); //alternately rListObject.setUniqueID(cursor.getInt(cursor.getColumnIndex(KEY_LIST_ID))); could be used
         rListObject.setListObjectName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));//"getColumnIndex" is more programming cycles than hardcodng in values, but hopefully will make the code my dynamic and bug-resistant.
         //TODO:Call getListItem and fill in ListItemArray.
@@ -76,27 +77,28 @@ public class ListDBHelper extends SQLiteOpenHelper {
     // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
     public void removeListObject(int pListObjectKey) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_LIST_OBJECTS + " WHERE " + KEY_LIST_ID + "=" + pListObjectKey);
+        db.execSQL("DELETE FROM " + TABLE_LIST_OBJECTS + " WHERE " + KEY_OBJECT_ID + "=" + pListObjectKey);
     }
 
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListItem(ListItem pListItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO "+ TABLE_LIST_ITEMS +"("+ KEY_ITEM_ID +","+ KEY_NAME+") VALUES("+pListItem.getItemLinkID()+","+pListItem.getItemText()+")");
+        db.execSQL("INSERT INTO "+ TABLE_LIST_ITEMS +"("+ KEY_ITEM_ID+","+ KEY_ITEM_LIST_ID +","+ KEY_NAME+") VALUES("+pListItem.getItemUniqueID()+","+pListItem.getItemLinkID()+","+pListItem.getItemText()+")");
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
-    public ListItem getListItem(int pListItemKey) {
+    public ListItem getListItem(int pItemKey) {
         ListItem rListItem =new ListItem();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_LIST_ITEMS, new String[]{KEY_ITEM_ID,KEY_TEXT}, KEY_ITEM_ID+ "=?", new String[]{Integer.toString(pListItemKey)},null,null,null);
-        rListItem.setItemLinkID(pListItemKey);
+        Cursor cursor = db.query(TABLE_LIST_ITEMS, new String[]{KEY_ITEM_ID,KEY_ITEM_LIST_ID,KEY_TEXT}, KEY_ITEM_ID+ "=?", new String[]{Integer.toString(pItemKey)},null,null,null);
+        rListItem.setItemUniqueID(pItemKey);
+        rListItem.setItemLinkID(cursor.getInt(cursor.getColumnIndex(KEY_ITEM_LIST_ID)));
         rListItem.setItemText(cursor.getString(cursor.getColumnIndex(KEY_TEXT)));
         return rListItem;
     }
     // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
-    public void removeListItem(int pListItemKey) {
+    public void removeListItem(int pItemKey) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_LIST_ITEMS + " WHERE " + KEY_LIST_ID + "=" + pListItemKey);
+        db.execSQL("DELETE FROM " + TABLE_LIST_ITEMS + " WHERE " + KEY_ITEM_ID + "=" + pItemKey);
     }
 
 }
