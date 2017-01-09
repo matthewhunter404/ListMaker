@@ -107,4 +107,9 @@ public class ListDBHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_LIST_ITEMS + " WHERE " + KEY_ITEM_ID + "=" + pItemKey);
     }
 
+   //This function puts together a ListItem from a set a variables, and is used in both getListItem and getListObject
+   public ListItem makeListItem(int pUniqueID,String pItemText, int pLinkID) {
+       ListItem rListItem =new ListItem(pUniqueID,pItemText,pLinkID);
+       return rListItem;
+   }
 }
