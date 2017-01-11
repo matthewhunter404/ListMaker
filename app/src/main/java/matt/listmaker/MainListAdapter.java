@@ -49,7 +49,7 @@ public class MainListAdapter extends ArrayAdapter<ListObject> {
 
     static class MainAdapterHolder
     {
-        TextView Item_Title_textview;
+        TextView List_Name_textview;
     }
 }
 

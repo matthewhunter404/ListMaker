@@ -20,9 +20,6 @@ public class ListItem {
         linkID=pkeyID;
     }
 
-    public void setItemText(String pText) {
-        itemText=pText;
-    }
 
     public String getItemText(){
         return itemText;
