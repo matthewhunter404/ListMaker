@@ -10,10 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private ListDBHelper dbHelper;
-
+    private com.example.matt.listmaker.MainListAdapter mObjectAdapter;
     private ListView mListView;
+    private ArrayList<ListObject> mListObjects=new ArrayList<ListObject>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ListView mainListview = (ListView) findViewById(R.id.ListObjectDisplayList);
+        mObjectAdapter = new com.example.matt.listmaker.MainListAdapter(this, R.layout.object_list_item, R.id.object_list_item_textview, mListObjects);
+        mainListview.setAdapter(mObjectAdapter);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
