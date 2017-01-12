@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import matt.listmaker.ListObject;
 import matt.listmaker.R;
 
@@ -19,9 +22,9 @@ public class MainListAdapter extends ArrayAdapter<ListObject> {
 
     Context context;
     int layoutResourceId;
-    ListObject data[] = null;
+    List<ListObject> data = null;
 
-    public MainListAdapter(Context context, int layoutResourceId, int textlayoutResourceId,  ListObject[] data) {
+    public MainListAdapter(Context context, int layoutResourceId, int textlayoutResourceId,  List<ListObject> data) {
         super(context, layoutResourceId,textlayoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -45,7 +48,7 @@ public class MainListAdapter extends ArrayAdapter<ListObject> {
         }
         holder = new MainAdapterHolder();
         holder.List_Name_Textview = (TextView)row.findViewById(R.id.object_list_item_textview);
-        String displaytext = data[position].getListObjectName();
+        String displaytext = data.get(position).getListObjectName();
         holder.List_Name_Textview.setText(displaytext);
         return row;
     }

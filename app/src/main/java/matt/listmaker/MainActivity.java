@@ -11,12 +11,13 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ListDBHelper dbHelper;
     private com.example.matt.listmaker.MainListAdapter mObjectAdapter;
     private ListView mListView;
-    private ArrayList<ListObject> mListObjects=new ArrayList<ListObject>();
+    private List<ListObject> mListObjects=new ArrayList<ListObject>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
