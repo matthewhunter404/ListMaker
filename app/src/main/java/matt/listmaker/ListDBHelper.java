@@ -40,6 +40,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Create ListMakerObjects
+        //TODO: Implement "IF NOT EXISTS" clause
         String CREATE_LIST_TABLE = "CREATE TABLE " + TABLE_LIST_OBJECTS + "("
                 + KEY_OBJECT_ID  + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" +")";
         db.execSQL(CREATE_LIST_TABLE);
@@ -62,7 +63,14 @@ public class ListDBHelper extends SQLiteOpenHelper {
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListObject(ListObject pListObject) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO "+ TABLE_LIST_OBJECTS +"("+ KEY_OBJECT_ID +","+ KEY_NAME+") VALUES("+pListObject.getUniqueID()+","+pListObject.getListObjectName()+")");
+        //if the uniqueID in pListObject is -1 that means that the listObject hasn't been given a unique ID yet, in which case that field is left blank when inserting as this will make
+        //Sqllite automatically create a new unique number.
+        if(pListObject.getUniqueID()==-1) {
+            db.execSQL("INSERT INTO " + TABLE_LIST_OBJECTS + "(" +KEY_NAME + ") VALUES(" + pListObject.getListObjectName() + ")");
+        }
+        else {
+            db.execSQL("INSERT INTO " + TABLE_LIST_OBJECTS + "(" + KEY_OBJECT_ID + "," + KEY_NAME + ") VALUES(" + pListObject.getUniqueID() + "," + pListObject.getListObjectName() + ")");
+        }
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
     public ListObject getListObject(int pListObjectKey) {
