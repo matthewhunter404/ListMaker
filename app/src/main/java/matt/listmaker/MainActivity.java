@@ -32,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                ArrayList pArrayList=new ArrayList();
+                ListObject test = new ListObject("List Name", 0, pArrayList);
+                dbHelper.addListObject(test);
             }
         });
     }
