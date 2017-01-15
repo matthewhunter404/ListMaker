@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private ListDBHelper dbHelper;
+    private ListDBHelper dbHelper=new ListDBHelper(this);
     private com.example.matt.listmaker.MainListAdapter mObjectAdapter;
     private ListView mListView;
     private List<ListObject> mListObjects=new ArrayList<ListObject>();
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList pArrayList=new ArrayList();
-                ListObject test = new ListObject("List Name", -1, pArrayList);
+                ListObject test = new ListObject("List Name", 0, pArrayList);
                 dbHelper.addListObject(test);
             }
         });
