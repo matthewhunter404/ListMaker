@@ -15,8 +15,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ListDBHelper dbHelper=new ListDBHelper(this);
-    private com.example.matt.listmaker.MainListAdapter mObjectAdapter;
+    private MainListAdapter mObjectAdapter;
     private ListView mListView;
+    private ListItem moo;
     private List<ListObject> mListObjects=new ArrayList<ListObject>();
 
     @Override
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ListView mainListview = (ListView) findViewById(R.id.ListObjectDisplayList);
-        mObjectAdapter = new com.example.matt.listmaker.MainListAdapter(this, R.layout.object_list_item, R.id.object_list_item_textview, mListObjects);
+        mObjectAdapter = new MainListAdapter(this, R.layout.object_list_item, R.id.object_list_item_textview, mListObjects);
         mainListview.setAdapter(mObjectAdapter);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

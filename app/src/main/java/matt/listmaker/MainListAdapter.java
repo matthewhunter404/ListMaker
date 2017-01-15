@@ -1,4 +1,4 @@
-package com.example.matt.listmaker;
+package matt.listmaker;
 
 import android.app.Activity;
 import android.content.Context;
