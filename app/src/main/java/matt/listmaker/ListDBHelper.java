@@ -66,10 +66,10 @@ public class ListDBHelper extends SQLiteOpenHelper {
         //if the uniqueID in pListObject is -1 that means that the listObject hasn't been given a unique ID yet, in which case that field is left blank when inserting as this will make
         //Sqllite automatically create a new unique number.
         if(pListObject.getUniqueID()==-1) {
-            db.execSQL("INSERT INTO " + TABLE_LIST_OBJECTS + "(" +KEY_NAME + ") VALUES(" + pListObject.getListObjectName() + ")");
+            db.execSQL("INSERT INTO " + TABLE_LIST_OBJECTS + "(" +KEY_NAME + ") VALUES('" + pListObject.getListObjectName() + "')");
         }
         else {
-            db.execSQL("INSERT INTO " + TABLE_LIST_OBJECTS + "(" + KEY_OBJECT_ID + "," + KEY_NAME + ") VALUES(" + pListObject.getUniqueID() + "," + pListObject.getListObjectName() + ")");
+            db.execSQL("INSERT INTO " + TABLE_LIST_OBJECTS + "(" + KEY_OBJECT_ID + "," + KEY_NAME + ") VALUES(" + pListObject.getUniqueID() + ", '" + pListObject.getListObjectName() + "')");
         }
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.

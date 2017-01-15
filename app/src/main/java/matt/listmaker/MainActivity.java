@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList pArrayList=new ArrayList();
-                ListObject test = new ListObject("List Name", 0, pArrayList);
+                ListObject test = new ListObject("List Name", -1, pArrayList);
                 dbHelper.addListObject(test);
             }
         });
