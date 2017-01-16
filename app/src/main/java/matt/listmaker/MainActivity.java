@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList pArrayList=new ArrayList();
                 ListObject test = new ListObject("List Name", -1, pArrayList);
                 dbHelper.addListObject(test);
+                mListObjects.add(test);
+                mObjectAdapter.notifyDataSetChanged();
             }
         });
     }
