@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void syncListObjects() {
-        List<ListObject> ListObjects = new ArrayList<ListObject>();
+        //List<ListObject> ListObjects = new ArrayList<ListObject>();
         //Todo Call to DBHelper;
-        mListObjects=ListObjects;
+        mListObjects=dbHelper.getAllListObjects();
         mObjectAdapter.notifyDataSetChanged();
     }
 }

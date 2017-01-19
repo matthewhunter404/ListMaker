@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by MattsDesktop on 04/01/2017.
  */
@@ -92,7 +95,10 @@ public class ListDBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_LIST_OBJECTS + " WHERE " + KEY_OBJECT_ID + "=" + pListObjectKey);
     }
-
+    public List<ListObject> getAllListObjects(){
+        List<ListObject> tempListObjects = new ArrayList<ListObject>();
+        return tempListObjects;
+    }
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListItem(ListItem pListItem) {
         SQLiteDatabase db = this.getWritableDatabase();
