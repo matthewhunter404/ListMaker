@@ -68,4 +68,11 @@ public class MainActivity extends AppCompatActivity {
         mListObjects.add(pListObject);
         mObjectAdapter.notifyDataSetChanged();
     }
+
+    void syncListObjects() {
+        List<ListObject> ListObjects = new ArrayList<ListObject>();
+        //Todo Call to DBHelper;
+        mListObjects=ListObjects;
+        mObjectAdapter.notifyDataSetChanged();
+    }
 }
