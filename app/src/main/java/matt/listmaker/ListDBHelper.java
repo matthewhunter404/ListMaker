@@ -82,7 +82,6 @@ public class ListDBHelper extends SQLiteOpenHelper {
         Cursor objectCursor = db.query(TABLE_LIST_OBJECTS, new String[]{KEY_OBJECT_ID,KEY_NAME}, KEY_OBJECT_ID + "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
         rListObject.setUniqueID(pListObjectKey); //alternately rListObject.setUniqueID(cursor.getInt(cursor.getColumnIndex(KEY_LIST_ID))); could be used
         rListObject.setListObjectName(objectCursor.getString(objectCursor.getColumnIndex(KEY_NAME)));//"getColumnIndex" is more programming cycles than hardcodng in values, but hopefully will make the code my dynamic and bug-resistant.
-        //TODO:Call getListItem and fill in ListItemArray.
         Cursor itemCursor = db.query(TABLE_LIST_ITEMS, new String[]{KEY_ITEM_ID,KEY_ITEM_LIST_ID,KEY_TEXT}, KEY_ITEM_LIST_ID + "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
         while(itemCursor.moveToNext())
         {
@@ -136,4 +135,14 @@ public class ListDBHelper extends SQLiteOpenHelper {
        ListItem rListItem =new ListItem(pUniqueID,pItemText,pLinkID);
        return rListItem;
    }
+    //This function is intended for internal use in the DBhelper class, called to return a List of items that belong a ListObject.
+    public List<ListItem> getListItemArray(int pLinkID,SQLiteDatabase pDB){
+        List<ListItem> rTempListItems = new ArrayList<ListItem>();
+        Cursor itemCursor = pDB.query(TABLE_LIST_ITEMS, new String[]{KEY_ITEM_ID,KEY_ITEM_LIST_ID,KEY_TEXT}, KEY_ITEM_LIST_ID + "=?", new String[]{Integer.toString(pLinkID)},null,null,null);
+        while(itemCursor.moveToNext())
+        {
+            rTempListItems.add(makeListItem(itemCursor.getInt(itemCursor.getColumnIndex(KEY_ITEM_ID)), itemCursor.getString(itemCursor.getColumnIndex(KEY_TEXT)),pLinkID));
+        }
+        return rTempListItems;
+    }
 }
