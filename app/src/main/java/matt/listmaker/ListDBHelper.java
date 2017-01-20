@@ -94,10 +94,21 @@ public class ListDBHelper extends SQLiteOpenHelper {
     public void removeListObject(int pListObjectKey) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_LIST_OBJECTS + " WHERE " + KEY_OBJECT_ID + "=" + pListObjectKey);
+
     }
+    //This function gets all the ListObjects in the TABLE_LIST_OBJECTS table and then returns them in a List of ListObjects
+    //This should probably reuse the getListObject function, but that seems a bit inefficient in terms ofr gettign the writable database and setting up cursors
     public List<ListObject> getAllListObjects(){
-        List<ListObject> tempListObjects = new ArrayList<ListObject>();
-        return tempListObjects;
+        List<ListObject> rTempListObjects = new ArrayList<ListObject>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor objectCursor = db.rawQuery("select * from "+TABLE_LIST_OBJECTS,null);
+        while(objectCursor.moveToNext())
+        {
+            ArrayList<ListItem> dummyItemsArray= new ArrayList<ListItem>();
+            ListObject rListObject =new ListObject(objectCursor.getString(objectCursor.getColumnIndex(KEY_NAME)),objectCursor.getInt(objectCursor.getColumnIndex(KEY_ITEM_ID)),dummyItemsArray);
+            rTempListObjects.add(rListObject);
+        }
+        return rTempListObjects;
     }
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListItem(ListItem pListItem) {
