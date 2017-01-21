@@ -25,13 +25,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbHelper.clearDatabase();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ListView mainListview = (ListView) findViewById(R.id.ListObjectDisplayList);
         mObjectAdapter = new MainListAdapter(this, R.layout.object_list_item, R.id.object_list_item_textview, mListObjects);
         mainListview.setAdapter(mObjectAdapter);
-        //syncListObjects();
+        syncListObjects();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,15 +65,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void storeNewListObject(ListObject pListObject) {
+        testLogmListObjects();
         dbHelper.addListObject(pListObject);
-        mListObjects.add(pListObject);
-        mObjectAdapter.notifyDataSetChanged();
+        syncListObjects();
+        testLogmListObjects();
     }
 
     void syncListObjects() {
         //List<ListObject> ListObjects = new ArrayList<ListObject>();
-        mListObjects=dbHelper.getAllListObjects();
+        mListObjects.clear();
+        mListObjects.addAll(dbHelper.getAllListObjects());
         //Log.d("5th list object--",mListObjects.get(5).getListObjectName());
         mObjectAdapter.notifyDataSetChanged();
+    }
+
+    void testLogmListObjects()
+    {
+        for(int k=0;k<mListObjects.size();k++) {
+            Log.d("Test",Integer.toString(k)+" "+ mListObjects.get(k).getListObjectName() + " " + Integer.toString(mListObjects.get(k).getUniqueID()));
+        }
     }
 }
