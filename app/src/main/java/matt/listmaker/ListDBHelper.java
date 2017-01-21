@@ -96,14 +96,14 @@ public class ListDBHelper extends SQLiteOpenHelper {
 
     }
     //This function gets all the ListObjects in the TABLE_LIST_OBJECTS table and then returns them in a List of ListObjects
-    //This should probably reuse the getListObject function, but that seems a bit inefficient in terms ofr gettign the writable database and setting up cursors
+    //This should probably reuse the getListObject function, but that seems a bit inefficient in terms of getting the writable database and setting up cursors
     public List<ListObject> getAllListObjects(){
         List<ListObject> rTempListObjects = new ArrayList<ListObject>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor objectCursor = db.rawQuery("select * from "+TABLE_LIST_OBJECTS,null);
         while(objectCursor.moveToNext())
         {
-            int KeyItemID=objectCursor.getInt(objectCursor.getColumnIndex(KEY_ITEM_ID));
+            int KeyItemID=objectCursor.getInt(objectCursor.getColumnIndex(KEY_ITEM_ID)); //This variable is seperately created as it is used as an input in two places in the next statement, thus minimizing new calls to the database
             ListObject rListObject =new ListObject(objectCursor.getString(objectCursor.getColumnIndex(KEY_NAME)),KeyItemID,getListItemArray(KeyItemID,db));
             rTempListObjects.add(rListObject);
         }
