@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,11 +25,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbHelper.clearDatabase();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ListView mainListview = (ListView) findViewById(R.id.ListObjectDisplayList);
         mObjectAdapter = new MainListAdapter(this, R.layout.object_list_item, R.id.object_list_item_textview, mListObjects);
         mainListview.setAdapter(mObjectAdapter);
+        //syncListObjects();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList pArrayList = new ArrayList();
                 ListObject test = new ListObject("List Name", -1, pArrayList);
                 storeNewListObject(test);
-
             }
         });
     }
@@ -71,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
     void syncListObjects() {
         //List<ListObject> ListObjects = new ArrayList<ListObject>();
-        //Todo Call to DBHelper;
         mListObjects=dbHelper.getAllListObjects();
+        //Log.d("5th list object--",mListObjects.get(5).getListObjectName());
         mObjectAdapter.notifyDataSetChanged();
     }
 }

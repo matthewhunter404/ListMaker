@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,13 @@ public class ListDBHelper extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
+    //This function should clear both tables
+    public void clearDatabase() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + TABLE_LIST_OBJECTS);
+        db.execSQL("delete from " + TABLE_LIST_ITEMS);
+    }
+
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListObject(ListObject pListObject) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -98,14 +106,17 @@ public class ListDBHelper extends SQLiteOpenHelper {
     //This function gets all the ListObjects in the TABLE_LIST_OBJECTS table and then returns them in a List of ListObjects
     //This should probably reuse the getListObject function, but that seems a bit inefficient in terms of getting the writable database and setting up cursors
     public List<ListObject> getAllListObjects(){
+        Log.d("Check--  ","getAllListObjects called");
         List<ListObject> rTempListObjects = new ArrayList<ListObject>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor objectCursor = db.rawQuery("select * from "+TABLE_LIST_OBJECTS,null);
         while(objectCursor.moveToNext())
         {
+            Log.d("Check--  ","starts grabbing next object");
             int KeyItemID=objectCursor.getInt(objectCursor.getColumnIndex(KEY_ITEM_ID)); //This variable is seperately created as it is used as an input in two places in the next statement, thus minimizing new calls to the database
             ListObject rListObject =new ListObject(objectCursor.getString(objectCursor.getColumnIndex(KEY_NAME)),KeyItemID,getListItemArray(KeyItemID,db));
             rTempListObjects.add(rListObject);
+            Log.d("Check--  ","finished grabbing the object "+rListObject.getListObjectName()+"with an ID of "+Integer.toString(KeyItemID));
         }
         return rTempListObjects;
     }
