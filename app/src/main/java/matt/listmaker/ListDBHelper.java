@@ -103,8 +103,8 @@ public class ListDBHelper extends SQLiteOpenHelper {
         Cursor objectCursor = db.rawQuery("select * from "+TABLE_LIST_OBJECTS,null);
         while(objectCursor.moveToNext())
         {
-            ArrayList<ListItem> dummyItemsArray= new ArrayList<ListItem>();
-            ListObject rListObject =new ListObject(objectCursor.getString(objectCursor.getColumnIndex(KEY_NAME)),objectCursor.getInt(objectCursor.getColumnIndex(KEY_ITEM_ID)),dummyItemsArray);
+            int KeyItemID=objectCursor.getInt(objectCursor.getColumnIndex(KEY_ITEM_ID));
+            ListObject rListObject =new ListObject(objectCursor.getString(objectCursor.getColumnIndex(KEY_NAME)),KeyItemID,getListItemArray(KeyItemID,db));
             rTempListObjects.add(rListObject);
         }
         return rTempListObjects;

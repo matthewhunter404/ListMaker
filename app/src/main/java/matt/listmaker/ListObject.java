@@ -1,6 +1,7 @@
 package matt.listmaker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by MattsDesktop on 03/01/2017.
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class ListObject {
     private String listName; //The lists name
     private int uniqueID; // A unique ID to ensure that this List is unique, this is the main ID handle the program will have on the object as list names don't need to be unique.
-    private ArrayList<ListItem> listItemsArray;
+    private List<ListItem> listItemsArray;
 
     public ListObject(){
         listName="";
@@ -16,7 +17,7 @@ public class ListObject {
         listItemsArray=new ArrayList();
     }
 
-    public ListObject(String pName, int pUniqueID, ArrayList pArrayList){
+    public ListObject(String pName, int pUniqueID, List pArrayList){
         listName=pName;
         uniqueID=pUniqueID;
         listItemsArray=pArrayList;
@@ -36,7 +37,7 @@ public class ListObject {
         uniqueID=pUniqueID;
     }
 
-    public ArrayList getListItemsArray(){
+    public List getListItemsArray(){
         return listItemsArray;
     }
     public void setListItemsArray(ArrayList pArrayList){
