@@ -1,5 +1,7 @@
 package matt.listmaker;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private MainListAdapter mObjectAdapter;
     private ListView mListView;
     private ListItem moo;
+    private Context mContext=this; //This needs to be declared seperately as it is used in onClickListeners, where the "this" keyword is interpreted by the compiler as refereing to the listener itself.
     private List<ListObject> mListObjects = new ArrayList<ListObject>();
 
     @Override
@@ -36,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ArrayList pArrayList = new ArrayList();
+                //First set up the popup that will take the text as input
+                AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+                alert.setTitle("Title");
+                alert.setMessage("Message");
+                alert.show();
                 ListObject test = new ListObject("List Name", -1, pArrayList);
                 storeNewListObject(test);
             }
