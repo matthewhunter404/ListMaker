@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.delete_all) {
+            dbHelper.clearDatabase();
+            mListObjects.clear();
+            mObjectAdapter.notifyDataSetChanged();
             return true;
         }
         return super.onOptionsItemSelected(item);
