@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 alert.setMessage("Message");
                 alert.show();
                 ListObject test = new ListObject("List Name", -1, pArrayList);
-                storeNewListObject(test);
+                storeListObject(test);
             }
         });
     }
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    void storeNewListObject(ListObject pListObject) {
+    void storeListObject(ListObject pListObject) {
         testLogmListObjects();
         dbHelper.addListObject(pListObject);
         syncListObjects();
