@@ -77,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    ListObject getNewListObject()
+    {
+        ListObject rListObbject =new ListObject();
+        return rListObbject;
+    }
+
     void storeListObject(ListObject pListObject) {
         testLogmListObjects();
         dbHelper.addListObject(pListObject);
