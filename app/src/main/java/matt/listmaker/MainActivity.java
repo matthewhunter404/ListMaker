@@ -2,6 +2,7 @@ package matt.listmaker;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -40,10 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ArrayList pArrayList = new ArrayList();
                 //First set up the popup that will take the text as input
-                AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-                alert.setTitle("Title");
-                alert.setMessage("Message");
-                alert.show();
+
                 ListObject test = new ListObject("List Name", -1, pArrayList);
                 storeListObject(test);
             }
@@ -79,7 +78,28 @@ public class MainActivity extends AppCompatActivity {
 
     ListObject getNewListObject()
     {
-        ListObject rListObbject =new ListObject();
+        final ListObject rListObbject =new ListObject();
+        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+        alert.setTitle("Title");
+        alert.setMessage("Message");
+        // Set an EditText view to get user input
+        final EditText input = new EditText(mContext);
+        alert.setView(input);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int pPosition) {
+                rListObbject.setListObjectName(input.getText().toString());
+                rListObbject.setListItemsArray(new ArrayList());
+                rListObbject.setUniqueID(-1);
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+        alert.show();
         return rListObbject;
     }
 
