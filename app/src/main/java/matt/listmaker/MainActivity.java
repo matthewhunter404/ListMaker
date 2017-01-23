@@ -40,11 +40,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList pArrayList = new ArrayList();
-                //First set up the popup that will take the text as input
-
-                ListObject test = new ListObject("List Name", -1, pArrayList);
-                storeListObject(test);
+                storeListObject(getNewListObject());
             }
         });
     }
@@ -75,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+    //Accepts user input and returns a ListObject with the entered information
     ListObject getNewListObject()
     {
         final ListObject rListObbject =new ListObject();
