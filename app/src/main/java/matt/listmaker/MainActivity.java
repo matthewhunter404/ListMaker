@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storeListObject(getNewListObject());
+                getAndStoreNewListObject();
             }
         });
     }
@@ -72,21 +72,21 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     //Accepts user input and returns a ListObject with the entered information
-    ListObject getNewListObject()
+    void getAndStoreNewListObject()
     {
-        final ListObject rListObbject =new ListObject();
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
         alert.setTitle("Title");
         alert.setMessage("Message");
         // Set an EditText view to get user input
         final EditText input = new EditText(mContext);
         alert.setView(input);
-
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int pPosition) {
-                rListObbject.setListObjectName(input.getText().toString());
-                rListObbject.setListItemsArray(new ArrayList());
-                rListObbject.setUniqueID(-1);
+                ListObject tListObbject =new ListObject();
+                tListObbject.setListObjectName(input.getText().toString());
+                tListObbject.setListItemsArray(new ArrayList());
+                tListObbject.setUniqueID(-1);
+                storeListObject(tListObbject);
             }
         });
 
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         alert.show();
-        return rListObbject;
     }
 
     void storeListObject(ListObject pListObject) {

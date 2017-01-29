@@ -80,6 +80,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO " + TABLE_LIST_OBJECTS + "(" +KEY_NAME + ") VALUES('" + pListObject.getListObjectName() + "')");
         }
         else {
+            Log.d("Test",Integer.toString(pListObject.getUniqueID()));
             db.execSQL("INSERT INTO " + TABLE_LIST_OBJECTS + "(" + KEY_OBJECT_ID + "," + KEY_NAME + ") VALUES(" + pListObject.getUniqueID() + ", '" + pListObject.getListObjectName() + "')");
         }
     }
