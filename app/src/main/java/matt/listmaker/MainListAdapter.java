@@ -29,6 +29,7 @@ public class MainListAdapter extends ArrayAdapter<ListObject> {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        //vListItem.setOnClickListener(this);
     }
 
     @Override
@@ -57,6 +58,7 @@ public class MainListAdapter extends ArrayAdapter<ListObject> {
     static class MainAdapterHolder
     {
         TextView List_Name_Textview;
+
     }
 }
 

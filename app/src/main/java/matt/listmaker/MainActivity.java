@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ListView mainListview = (ListView) findViewById(R.id.ListObjectDisplayList);
+        mListView = (ListView) findViewById(R.id.ListObjectDisplayList);
         mObjectAdapter = new MainListAdapter(this, R.layout.object_list_item, R.id.object_list_item_textview, mListObjects);
-        mainListview.setAdapter(mObjectAdapter);
+        mListView.setAdapter(mObjectAdapter);
         syncListObjects();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
