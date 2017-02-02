@@ -48,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
+                //Intent image_intent = new Intent(MainActivity.this, ImageActivity.class);
+                //image_intent.putExtra("position", position);
+                //MainActivity.this.startActivity(image_intent);
             }
         });
 
