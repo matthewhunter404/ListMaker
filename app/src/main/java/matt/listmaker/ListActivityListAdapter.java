@@ -30,7 +30,7 @@ public class ListActivityListAdapter extends ArrayAdapter<ListItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        MainListAdapter.MainAdapterHolder holder = null;
+        ListActivityListAdapter.ListActivityAdapterHolder holder = null;
 
         if(row == null)
         {
@@ -40,18 +40,18 @@ public class ListActivityListAdapter extends ArrayAdapter<ListItem> {
         }
         else
         {
-            holder = (MainListAdapter.MainAdapterHolder)row.getTag();
+            holder = (ListActivityListAdapter.ListActivityAdapterHolder)row.getTag();
         }
-        holder = new MainListAdapter.MainAdapterHolder();
-        holder.List_Name_Textview = (TextView)row.findViewById(R.id.object_list_item_textview);
+        holder = new ListActivityListAdapter.ListActivityAdapterHolder();
+        holder.Item_Name_Textview = (TextView)row.findViewById(R.id.item_list_textview);
         String displaytext = data.get(position).getItemText();
-        holder.List_Name_Textview.setText(displaytext);
+        holder.Item_Name_Textview.setText(displaytext);
         return row;
     }
     //The main adapter holder is simply a class to hold various views, so that they don't have to be constantly found every time the the program needs to
     //alther the data in them in some way. These variables are grouped together in one class for convenience
-    static class MainAdapterHolder
+    static class ListActivityAdapterHolder
     {
-        TextView List_Name_Textview;
+        TextView Item_Name_Textview;
     }
 }
