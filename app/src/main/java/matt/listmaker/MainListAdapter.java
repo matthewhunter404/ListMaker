@@ -53,12 +53,11 @@ public class MainListAdapter extends ArrayAdapter<ListObject> {
         holder.List_Name_Textview.setText(displaytext);
         return row;
     }
-    //The main adapter holder is simply a class to hold various views, so that they don't have to be constantly foudn every time the the program needs to
+    //The main adapter holder is simply a class to hold various views, so that they don't have to be constantly found every time the the program needs to
     //alther the data in them in some way. These variables are grouped together in one class for convenience
     static class MainAdapterHolder
     {
         TextView List_Name_Textview;
-
     }
 }
 
