@@ -48,7 +48,7 @@ public class MainListAdapter extends ArrayAdapter<ListObject> {
             holder = (MainAdapterHolder)row.getTag();
         }
         holder = new MainAdapterHolder();
-        holder.List_Name_Textview = (TextView)row.findViewById(R.id.object_list_item_textview);
+        holder.List_Name_Textview = (TextView)row.findViewById(R.id.object_list_row_textview);
         String displaytext = data.get(position).getListObjectName();
         holder.List_Name_Textview.setText(displaytext);
         return row;
