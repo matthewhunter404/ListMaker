@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mListView = (ListView) findViewById(R.id.ListObjectDisplayList);
-        mObjectAdapter = new MainListAdapter(this, R.layout.object_list_row, R.id.object_list_item_textview, mListObjects);
+        mObjectAdapter = new MainListAdapter(this, R.layout.object_list_row, R.id.object_list_row_textview, mListObjects);
         mListView.setAdapter(mObjectAdapter);
         syncListObjects();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
