@@ -1,7 +1,9 @@
 package matt.listmaker;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -22,6 +24,13 @@ public class ListActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.ListObjectDisplayList);
         mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, R.id.item_list_textview, mListItems);
         mListView.setAdapter(mItemAdapter);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
     }
 
 
