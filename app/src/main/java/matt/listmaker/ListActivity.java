@@ -50,6 +50,8 @@ public class ListActivity extends AppCompatActivity {
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int pPosition) {
                 ListItem newListItem=new ListItem(-1,input.getText().toString(),mListObject.getUniqueID());
+                mListItems.add(newListItem);
+                mListObject.addListItem(newListItem);
             }
         });
 
