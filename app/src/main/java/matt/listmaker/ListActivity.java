@@ -22,6 +22,7 @@ public class ListActivity extends AppCompatActivity {
     private ListActivityListAdapter mItemAdapter;
     private Context mContext=this;
     private List<ListItem> mListItems = new ArrayList<ListItem>();
+    private ListObject mListObject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class ListActivity extends AppCompatActivity {
         alert.setView(input);
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int pPosition) {
-
+                ListItem newListItem=new ListItem(-1,input.getText().toString(),mListObject.getUniqueID());
             }
         });
 
