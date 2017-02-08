@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Intent ListActivity_intent = new Intent(MainActivity.this, ListActivity.class);
-                ListActivity_intent.putExtra("position", position);
+                ListActivity_intent.putExtra("ListObjectUniqueID", mListObjects.get(position).getUniqueID(););
                 MainActivity.this.startActivity(ListActivity_intent);
             }
         });
