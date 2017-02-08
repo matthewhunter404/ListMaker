@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private ListDBHelper dbHelper = new ListDBHelper(this);
     private MainListAdapter mObjectAdapter;
     private ListView mListView;
-    private ListItem moo;
     private Context mContext=this; //This needs to be declared seperately as it is used in onClickListeners, where the "this" keyword is interpreted by the compiler as refereing to the listener itself.
     private List<ListObject> mListObjects = new ArrayList<ListObject>();
 
