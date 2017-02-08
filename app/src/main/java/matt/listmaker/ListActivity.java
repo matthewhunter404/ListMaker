@@ -27,7 +27,7 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        mListView = (ListView) findViewById(R.id.ListObjectDisplayList);
+        mListView = (ListView) findViewById(R.id.ListItemDisplayList);
         mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, R.id.item_list_textview, mListItems);
         mListView.setAdapter(mItemAdapter);
 
