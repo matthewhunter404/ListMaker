@@ -30,6 +30,8 @@ public class ListActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.ListItemDisplayList);
         mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, R.id.item_list_textview, mListItems);
         mListView.setAdapter(mItemAdapter);
+        Bundle bundle = getIntent().getExtras();
+        int uniqueID=bundle.getInt("ListObjectUniqueID");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.list_fab);
         fab.setOnClickListener(new View.OnClickListener() {
