@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -33,6 +34,7 @@ public class ListActivity extends AppCompatActivity {
         mListView.setAdapter(mItemAdapter);
         Bundle bundle = getIntent().getExtras();
         int uniqueID=bundle.getInt("ListObjectUniqueID");
+        Log.d("Test",Integer.toString(uniqueID));
         mListObject=dbHelper.getListObject(uniqueID);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.list_fab);

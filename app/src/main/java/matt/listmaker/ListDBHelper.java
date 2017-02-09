@@ -89,12 +89,16 @@ public class ListDBHelper extends SQLiteOpenHelper {
         ListObject rListObject =new ListObject();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor objectCursor = db.query(TABLE_LIST_OBJECTS, new String[]{KEY_OBJECT_ID,KEY_NAME}, KEY_OBJECT_ID + "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
-        rListObject.setUniqueID(pListObjectKey); //alternately rListObject.setUniqueID(cursor.getInt(cursor.getColumnIndex(KEY_LIST_ID))); could be used
-        rListObject.setListObjectName(objectCursor.getString(objectCursor.getColumnIndex(KEY_NAME)));//"getColumnIndex" is more programming cycles than hardcodng in values, but hopefully will make the code my dynamic and bug-resistant.
-        Cursor itemCursor = db.query(TABLE_LIST_ITEMS, new String[]{KEY_ITEM_ID,KEY_ITEM_LIST_ID,KEY_TEXT}, KEY_ITEM_LIST_ID + "=?", new String[]{Integer.toString(pListObjectKey)},null,null,null);
-        while(itemCursor.moveToNext())
-        {
-            rListObject.addListItem(makeListItem(itemCursor.getInt(itemCursor.getColumnIndex(KEY_ITEM_ID)), itemCursor.getString(itemCursor.getColumnIndex(KEY_TEXT)),pListObjectKey));
+        if (!(objectCursor.moveToFirst()) || objectCursor.getCount() ==0){
+            Log.e("Error","Help I'm empty");
+        }
+        else {
+            rListObject.setUniqueID(pListObjectKey); //alternately rListObject.setUniqueID(cursor.getInt(cursor.getColumnIndex(KEY_LIST_ID))); could be used
+            rListObject.setListObjectName(objectCursor.getString(objectCursor.getColumnIndex(KEY_NAME)));//"getColumnIndex" is more programming cycles than hardcodng in values, but hopefully will make the code my dynamic and bug-resistant.
+            Cursor itemCursor = db.query(TABLE_LIST_ITEMS, new String[]{KEY_ITEM_ID, KEY_ITEM_LIST_ID, KEY_TEXT}, KEY_ITEM_LIST_ID + "=?", new String[]{Integer.toString(pListObjectKey)}, null, null, null);
+            while (itemCursor.moveToNext()) {
+                rListObject.addListItem(makeListItem(itemCursor.getInt(itemCursor.getColumnIndex(KEY_ITEM_ID)), itemCursor.getString(itemCursor.getColumnIndex(KEY_TEXT)), pListObjectKey));
+            }
         }
         return rListObject;
     }

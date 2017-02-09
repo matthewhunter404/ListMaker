@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Intent ListActivity_intent = new Intent(MainActivity.this, ListActivity.class);
+                Log.d("Test",Integer.toString(position)+" "+ mListObjects.get(position).getListObjectName() + " " + Integer.toString(mListObjects.get(position).getUniqueID()));
                 ListActivity_intent.putExtra("ListObjectUniqueID", mListObjects.get(position).getUniqueID());
                 MainActivity.this.startActivity(ListActivity_intent);
             }
