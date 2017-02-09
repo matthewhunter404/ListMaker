@@ -18,6 +18,7 @@ import java.util.List;
  */
 
 public class ListActivity extends AppCompatActivity {
+    private ListDBHelper dbHelper = new ListDBHelper(this);
     private ListView mListView;
     private ListActivityListAdapter mItemAdapter;
     private Context mContext=this;
@@ -32,6 +33,7 @@ public class ListActivity extends AppCompatActivity {
         mListView.setAdapter(mItemAdapter);
         Bundle bundle = getIntent().getExtras();
         int uniqueID=bundle.getInt("ListObjectUniqueID");
+        mListObject=dbHelper.getListObject(uniqueID);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.list_fab);
         fab.setOnClickListener(new View.OnClickListener() {
