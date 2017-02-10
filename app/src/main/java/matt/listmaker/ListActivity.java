@@ -60,6 +60,7 @@ public class ListActivity extends AppCompatActivity {
                 ListItem newListItem=new ListItem(-1,input.getText().toString(),mListObject.getUniqueID());
                 mListItems.add(newListItem);
                 mListObject.addListItem(newListItem);
+
             }
         });
 
