@@ -36,9 +36,9 @@ public class ListActivity extends AppCompatActivity {
         mListObject=dbHelper.getListObject(uniqueID);
 
         mListView = (ListView) findViewById(R.id.ListItemDisplayList);
-        mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, R.id.item_list_textview, mListItems);
+        mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, R.id.item_list_textview, mListObject.getListItemsArray());
         mListView.setAdapter(mItemAdapter);
-        
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.list_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
