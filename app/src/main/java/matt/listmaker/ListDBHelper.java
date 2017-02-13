@@ -103,8 +103,9 @@ public class ListDBHelper extends SQLiteOpenHelper {
         return rListObject;
     }
     //Replaces a ListObject with a new one, used to update the databases ListObjects
-    public void replaceListObject(int pListObject) {
-
+    public void replaceListObject(ListObject pListObject) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor objectCursor = db.query(TABLE_LIST_OBJECTS, new String[]{KEY_OBJECT_ID,KEY_NAME}, KEY_OBJECT_ID + "=?", new String[]{Integer.toString(pListObject.getUniqueID())},null,null,null);
     }
 
     // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
