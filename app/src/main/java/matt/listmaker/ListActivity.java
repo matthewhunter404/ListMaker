@@ -60,16 +60,18 @@ public class ListActivity extends AppCompatActivity {
                 ListItem newListItem=new ListItem(-1,input.getText().toString(),mListObject.getUniqueID());
                 mListItems.add(newListItem);
                 mListObject.addListItem(newListItem);
+                //Todo: Find appropriate place to put this database update.
+                dbHelper.replaceListObject(mListObject); //This might be more efficient in terms of Database calls to place at the functinos called when the activity comes to an end.
 
             }
         });
-
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // Canceled.
             }
         });
         alert.show();
+
     }
 
 
