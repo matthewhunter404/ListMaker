@@ -107,6 +107,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
         //replaceListObject takes a  ListObject as an input and the cursor points to the ListObject currently in the database with the same unique ID.
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("REPLACE INTO " + TABLE_LIST_OBJECTS + "(" + KEY_OBJECT_ID + "," + KEY_NAME + ") VALUES('" + pListObject.getUniqueID()+ "','" + pListObject.getListObjectName() + "')");
+        removeAllListItems(pListObject.getUniqueID()); //Deletes all the ListItems that are associated with the replaced ListObject
         List<ListItem> tempListItemsArray=pListObject.getListItemsArray(); //Stores the listItems in a temporary ListItem List for less computationally expensive referral
         //Adds all the Listitems in the ListObject to the ListItems Table
         for(int k=0;k<pListObject.getListItemsArray().size();k++) {
