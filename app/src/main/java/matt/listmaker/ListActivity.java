@@ -60,8 +60,8 @@ public class ListActivity extends AppCompatActivity {
                 ListItem newListItem=new ListItem(-1,input.getText().toString(),mListObject.getUniqueID());
                 mListItems.add(newListItem);
                 mListObject.addListItem(newListItem);
-                //Todo: Find appropriate place to put this database update.
-                dbHelper.replaceListObject(mListObject); //This might be more efficient in terms of Database calls to place at the functinos called when the activity comes to an end.
+                //Todo: Find appropriate place to put this database update. It might be here though.
+                dbHelper.replaceListObject(mListObject); //This might be more efficient in terms of Database calls to place at the functions called when the activity comes to an end. But how suddenly can the function be called to stop?
 
             }
         });

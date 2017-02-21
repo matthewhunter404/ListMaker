@@ -141,7 +141,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListItem(ListItem pListItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO "+ TABLE_LIST_ITEMS +"("+ KEY_ITEM_ID+","+ KEY_ITEM_LIST_ID +","+ KEY_NAME+") VALUES("+pListItem.getItemUniqueID()+","+pListItem.getItemLinkID()+",'"+pListItem.getItemText()+"')");
+        db.execSQL("INSERT INTO "+ TABLE_LIST_ITEMS +"("+ KEY_ITEM_ID+","+ KEY_ITEM_LIST_ID +","+ KEY_TEXT+") VALUES ("+pListItem.getItemUniqueID()+","+pListItem.getItemLinkID()+",'"+pListItem.getItemText()+"')");
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
     public ListItem getListItem(int pItemKey) {
