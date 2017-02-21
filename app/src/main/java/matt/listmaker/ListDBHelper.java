@@ -152,10 +152,16 @@ public class ListDBHelper extends SQLiteOpenHelper {
         //rListItem.setItemText(cursor.getString(cursor.getColumnIndex(KEY_TEXT)));
         return makeListItem(pItemKey, cursor.getString(cursor.getColumnIndex(KEY_TEXT)),cursor.getInt(cursor.getColumnIndex(KEY_ITEM_LIST_ID)));
     }
-    // Removing a List from the database, the function takes a int key to the ListObject entry to be deleted, finds it and then removes it.
+    // Removing a ListItem from the database, the function takes a int key to the ListItem entry to be deleted, finds it and then removes it.
     public void removeListItem(int pItemKey) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_LIST_ITEMS + " WHERE " + KEY_ITEM_ID + "=" + pItemKey);
+    }
+
+    //Removes all the ListItems belonging to a certain List. All this ListItems will have the same KEY_ITEM_LIST_ID, making them easy to find and delete
+    public void removeAllListItems(int pItemListKey) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_LIST_ITEMS + " WHERE " + KEY_ITEM_LIST_ID + "=" + pItemListKey);
     }
 
    //This function puts together a ListItem from a set a variables, and is used in both getListItem and getListObject
