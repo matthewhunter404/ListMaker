@@ -62,7 +62,7 @@ public class ListActivity extends AppCompatActivity {
                 mListObject.addListItem(newListItem);
                 //Todo: Find appropriate place to put this database update. It might be here though.
                 dbHelper.replaceListObject(mListObject); //This might be more efficient in terms of Database calls to place at the functions called when the activity comes to an end. But how suddenly can the function be called to stop?
-
+                mItemAdapter.notifyDataSetChanged(); //Updates the items shown in the ListView to reflect theis most recent addition.
             }
         });
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
