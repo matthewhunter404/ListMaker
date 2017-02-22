@@ -141,7 +141,14 @@ public class ListDBHelper extends SQLiteOpenHelper {
     // Adding new List, the function takes a ListObject Object and creates the appropriate Database entries.
     public void addListItem(ListItem pListItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO "+ TABLE_LIST_ITEMS +"("+ KEY_ITEM_ID+","+ KEY_ITEM_LIST_ID +","+ KEY_TEXT+") VALUES ("+pListItem.getItemUniqueID()+","+pListItem.getItemLinkID()+",'"+pListItem.getItemText()+"')");
+        //if the ItemUniqueID in pListItem is -1 that means that the listItem hasn't been given a unique ID yet, in which case that field is left blank when inserting as this will make
+        //Sqllite automatically create a new unique number.
+        if(pListItem.getItemUniqueID()==-1) {
+            db.execSQL("INSERT INTO " + TABLE_LIST_ITEMS + "(" +KEY_ITEM_LIST_ID + "," + KEY_TEXT + ") VALUES('" + pListItem.getItemLinkID() + "','" + pListItem.getItemText() + "')");
+        }
+        else {
+            db.execSQL("INSERT INTO " + TABLE_LIST_ITEMS + "(" + KEY_ITEM_ID + "," + KEY_ITEM_LIST_ID + "," + KEY_TEXT + ") VALUES (" + pListItem.getItemUniqueID() + "," + pListItem.getItemLinkID() + ",'" + pListItem.getItemText() + "')");
+        }
     }
     // Returns a ListObject from the database, the function takes a int key to the ListObject entry, gets the fields from it and builds the ListObject Object, which is then returned.
     public ListItem getListItem(int pItemKey) {
