@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -20,11 +22,13 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
     private ListDBHelper dbHelper = new ListDBHelper(this);
-    private ListView mListView;
+    private RecyclerView mRecyclerView;
     private ListActivityListAdapter mItemAdapter;
     private Context mContext=this;
     private List<ListItem> mListItems = new ArrayList<ListItem>();
     private ListObject mListObject;
+    private RecyclerView.LayoutManager mLayoutManager; //RecyclerViews need a LayoutManager
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +39,14 @@ public class ListActivity extends AppCompatActivity {
         Log.d("Test",Integer.toString(uniqueID));
         mListObject=dbHelper.getListObject(uniqueID);
 
-        mListView = (ListView) findViewById(R.id.ListItemDisplayList);
-        mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, R.id.item_list_textview, mListObject.getListItemsArray());
-        mListView.setAdapter(mItemAdapter);
+        mRecyclerView = (RecyclerView) findViewById(R.id.ListItemDisplayList);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, mListObject.getListItemsArray());
+        mRecyclerView.setAdapter(mItemAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.list_fab);
         fab.setOnClickListener(new View.OnClickListener() {
