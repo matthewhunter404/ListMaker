@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ public class ListActivity extends AppCompatActivity {
     private ListDBHelper dbHelper = new ListDBHelper(this);
     private RecyclerView mRecyclerView;
     private ListActivityListAdapter mItemAdapter;
+    private ItemTouchHelperAdapter mItemTouchHelperAdapter;
     private Context mContext=this;
     private List<ListItem> mListItems = new ArrayList<ListItem>();
     private ListObject mListObject;
@@ -47,6 +49,11 @@ public class ListActivity extends AppCompatActivity {
 
         mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, mListObject.getListItemsArray());
         mRecyclerView.setAdapter(mItemAdapter);
+
+        ItemTouchHelper.Callback callback =
+                new ListItemTouchHelper(mItemTouchHelperAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.list_fab);
         fab.setOnClickListener(new View.OnClickListener() {
