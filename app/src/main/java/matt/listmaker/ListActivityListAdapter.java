@@ -25,13 +25,13 @@ public class ListActivityListAdapter extends RecyclerView.Adapter<ListActivityLi
     Context context;
     int layoutResourceId;
     List<ListItem> data = null;
-
+    private ListDBHelper dbHelper;
 
     public ListActivityListAdapter  (Context context, int layoutResourceId,  List<ListItem> data) {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
-        //vListItem.setOnClickListener(this);
+        dbHelper= new ListDBHelper(context);
     }
     // Create new views (invoked by the layout manager)
     @Override
@@ -74,6 +74,7 @@ public class ListActivityListAdapter extends RecyclerView.Adapter<ListActivityLi
     }
     @Override
     public void onItemDismiss(int position) {
+        dbHelper.removeListItem(data.get(position).getItemUniqueID());
         data.remove(position);
         notifyItemRemoved(position);
     }
