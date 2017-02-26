@@ -11,20 +11,23 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by MattsDesktop on 05/02/2017.
+ *
+ * Credit to https://medium.com/@ipaulpro/drag-and-swipe-with-recyclerview-b9456d2b1aaf#.fj6m4xxlu for explaining how to implement swipe to delete
  */
 
-public class ListActivityListAdapter extends RecyclerView.Adapter<ListActivityListAdapter.ListActivityViewHolder> {
+public class ListActivityListAdapter extends RecyclerView.Adapter<ListActivityListAdapter.ListActivityViewHolder> implements ItemTouchHelperAdapter {
     Context context;
     int layoutResourceId;
     List<ListItem> data = null;
 
 
-    public ListActivityListAdapter (Context context, int layoutResourceId,  List<ListItem> data) {
+    public ListActivityListAdapter  (Context context, int layoutResourceId,  List<ListItem> data) {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
@@ -69,5 +72,23 @@ public class ListActivityListAdapter extends RecyclerView.Adapter<ListActivityLi
             mTextView = v;
         }
     }
+    @Override
+    public void onItemDismiss(int position) {
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
 
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(data, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(data, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition); //It’s very important to call notifyItemRemoved() and notifyItemMoved() so the Adapter is aware of the changes.
+    }
 }
