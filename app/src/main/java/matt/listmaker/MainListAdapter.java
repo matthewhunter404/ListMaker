@@ -59,5 +59,7 @@ public class MainListAdapter extends ArrayAdapter<ListObject> {
     {
         TextView List_Name_Textview;
     }
+
+
 }
 
