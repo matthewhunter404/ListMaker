@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private ListDBHelper dbHelper = new ListDBHelper(this);
     private MainListAdapter mObjectAdapter;
-    private ListView mListView;
+    private RecyclerView mRecyclerView;
     private Context mContext=this; //This needs to be declared seperately as it is used in onClickListeners, where the "this" keyword is interpreted by the compiler as refereing to the listener itself.
     private List<ListObject> mListObjects = new ArrayList<ListObject>();
 
@@ -33,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mListView = (ListView) findViewById(R.id.ListObjectDisplayList);
+        mRecyclerView = (RecyclerView) findViewById(R.id.ListObjectDisplayList);
         mObjectAdapter = new MainListAdapter(this, R.layout.object_list_row, R.id.object_list_row_textview, mListObjects);
-        mListView.setAdapter(mObjectAdapter);
+        mRecyclerView.setAdapter(mObjectAdapter);
         syncListObjects();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mRecyclerView.set
+
+                .setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Intent ListActivity_intent = new Intent(MainActivity.this, ListActivity.class);
                 Log.d("Test",Integer.toString(position)+" "+ mListObjects.get(position).getListObjectName() + " " + Integer.toString(mListObjects.get(position).getUniqueID()));
