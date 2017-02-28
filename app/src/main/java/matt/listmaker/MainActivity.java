@@ -46,25 +46,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mRecyclerView.set
-
-                .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Intent ListActivity_intent = new Intent(MainActivity.this, ListActivity.class);
-                Log.d("Test",Integer.toString(position)+" "+ mListObjects.get(position).getListObjectName() + " " + Integer.toString(mListObjects.get(position).getUniqueID()));
-                ListActivity_intent.putExtra("ListObjectUniqueID", mListObjects.get(position).getUniqueID());
-                MainActivity.this.startActivity(ListActivity_intent);
-            }
-        });
         mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(context, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(this, mRecyclerView,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        // do whatever
+                        Intent ListActivity_intent = new Intent(MainActivity.this, ListActivity.class);
+                        Log.d("Test",Integer.toString(position)+" "+ mListObjects.get(position).getListObjectName() + " " + Integer.toString(mListObjects.get(position).getUniqueID()));
+                        ListActivity_intent.putExtra("ListObjectUniqueID", mListObjects.get(position).getUniqueID());
+                        MainActivity.this.startActivity(ListActivity_intent);
                     }
 
-                    @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
-                    }
                 })
         );
     }
