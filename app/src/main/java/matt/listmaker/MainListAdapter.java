@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +26,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
     Context context;
     int layoutResourceId;
     List<ListObject> data = null;
+
 
     public MainListAdapter(Context context, int layoutResourceId, int textlayoutResourceId,  List<ListObject> data) {
         this.layoutResourceId = layoutResourceId;
@@ -68,7 +70,6 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
             super(v);
             mTextView = v;
         }
-
     }
 
 

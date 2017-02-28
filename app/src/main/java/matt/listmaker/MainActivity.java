@@ -56,7 +56,17 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(ListActivity_intent);
             }
         });
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, recyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        // do whatever
+                    }
 
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
     }
 
     @Override
