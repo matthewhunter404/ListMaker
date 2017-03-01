@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private Context mContext=this; //This needs to be declared seperately as it is used in onClickListeners, where the "this" keyword is interpreted by the compiler as refereing to the listener itself.
     private List<ListObject> mListObjects = new ArrayList<ListObject>();
+    private RecyclerView.LayoutManager mLayoutManager; //RecyclerViews need a LayoutManager
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,18 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mRecyclerView = (RecyclerView) findViewById(R.id.ListObjectDisplayList);
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         mObjectAdapter = new MainListAdapter(this, R.layout.object_list_row, R.id.object_list_row_textview, mListObjects);
         mRecyclerView.setAdapter(mObjectAdapter);
+
+        ItemTouchHelper.Callback callback = new ListItemTouchHelper(mObjectAdapter);
+        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+
         syncListObjects();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

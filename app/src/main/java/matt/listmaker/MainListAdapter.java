@@ -21,17 +21,19 @@ import matt.listmaker.R;
 /**
  * Created by matt on 2016/06/07.
  */
-public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAdapterHolder> {
+public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAdapterHolder> implements ItemTouchHelperAdapter{
 
     Context context;
     int layoutResourceId;
     List<ListObject> data = null;
+    private ListDBHelper dbHelper;
 
 
     public MainListAdapter(Context context, int layoutResourceId, int textlayoutResourceId,  List<ListObject> data) {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        dbHelper= new ListDBHelper(context);
         //vListItem.setOnClickListener(this);
     }
     // Create new views (invoked by the layout manager)
@@ -71,7 +73,26 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
             mTextView = v;
         }
     }
+    @Override
+    public void onItemDismiss(int position) {
+        dbHelper.removeListObject(data.get(position).getUniqueID());
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
 
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(data, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(data, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition); //It’s very important to call notifyItemRemoved() and notifyItemMoved() so the Adapter is aware of the changes.
+    }
 
 }
 
