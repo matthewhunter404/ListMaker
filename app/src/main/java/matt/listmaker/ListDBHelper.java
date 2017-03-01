@@ -64,7 +64,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
-    //This function should clear both tables
+    //This function clears both tables
     public void clearDatabase() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from " + TABLE_LIST_OBJECTS);
@@ -119,7 +119,7 @@ public class ListDBHelper extends SQLiteOpenHelper {
     public void removeListObject(int pListObjectKey) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_LIST_OBJECTS + " WHERE " + KEY_OBJECT_ID + "=" + pListObjectKey);
-
+        removeAllListItems(pListObjectKey); //Deletes all the ListItems that are associated with the replaced ListObject
     }
     //This function gets all the ListObjects in the TABLE_LIST_OBJECTS table and then returns them in a List of ListObjects
     //This should probably reuse the getListObject function, but that seems a bit inefficient in terms of getting the writable database and setting up cursors
