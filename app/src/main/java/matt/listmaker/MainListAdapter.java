@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +41,9 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
     @Override
     public MainListAdapter.MainAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.object_list_row, parent, false);
+        LinearLayout ListItemView = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.object_list_row, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        MainAdapterHolder vh = new MainAdapterHolder(v);
+        MainAdapterHolder vh = new MainAdapterHolder(ListItemView);
         return vh;
     }
     // Replace the contents of a view (invoked by the layout manager)
@@ -68,9 +69,9 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
     public static class MainAdapterHolder extends RecyclerView.ViewHolder
     {
         public TextView mTextView;
-        public MainAdapterHolder(TextView v) {
+        public MainAdapterHolder(LinearLayout v) {
             super(v);
-            mTextView = v;
+            mTextView = (TextView) v.findViewById((R.id.object_list_row_textview));
         }
     }
     @Override
