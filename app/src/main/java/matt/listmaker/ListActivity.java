@@ -3,8 +3,10 @@ package matt.listmaker;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +51,9 @@ public class ListActivity extends AppCompatActivity {
 
         mItemAdapter = new ListActivityListAdapter(this, R.layout.item_list_row, mListObject.getListItemsArray());
         mRecyclerView.setAdapter(mItemAdapter);
+        Drawable dividerDrawable = ContextCompat.getDrawable(this, R.drawable.horizontal_divider);
+        RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecoration(dividerDrawable);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         ItemTouchHelper.Callback callback = new ListItemTouchHelper(mItemAdapter);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
