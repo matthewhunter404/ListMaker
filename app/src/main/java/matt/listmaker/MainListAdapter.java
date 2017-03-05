@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,9 +70,11 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
     public static class MainAdapterHolder extends RecyclerView.ViewHolder
     {
         public TextView mTextView;
+        public Button mButton;
         public MainAdapterHolder(LinearLayout v) {
             super(v);
             mTextView = (TextView) v.findViewById((R.id.object_list_row_textview));
+            mButton= (Button) v.findViewById((R.id.undo_button));
         }
     }
     @Override
