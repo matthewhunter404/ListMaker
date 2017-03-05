@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="delete_all">Clear all lists</string>
     <string name="list_activity_name">ListActivity</string>
+
+    <string name="title_activity_settings">Settings</string>
 </resources>
