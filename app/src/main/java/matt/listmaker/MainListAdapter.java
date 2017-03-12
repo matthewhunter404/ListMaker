@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
     @Override
     public MainListAdapter.MainAdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        LinearLayout ListItemView = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.object_list_row, parent, false);
+        FrameLayout ListItemView = (FrameLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.object_list_row, parent, false);
         // set the view's size, margins, paddings and layout parameters
         MainAdapterHolder vh = new MainAdapterHolder(ListItemView);
         return vh;
@@ -71,7 +72,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
     {
         public TextView mTextView;
         public Button mButton;
-        public MainAdapterHolder(LinearLayout v) {
+        public MainAdapterHolder(FrameLayout v) {
             super(v);
             mTextView = (TextView) v.findViewById((R.id.object_list_row_textview));
             mButton= (Button) v.findViewById((R.id.undo_button));
