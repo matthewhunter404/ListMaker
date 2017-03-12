@@ -76,6 +76,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
             super(v);
             mTextView = (TextView) v.findViewById((R.id.object_list_row_textview));
             mButton= (Button) v.findViewById((R.id.undo_button));
+            mButton.setEnabled(false);
+            mButton.setVisibility(View.INVISIBLE);
         }
     }
     @Override
