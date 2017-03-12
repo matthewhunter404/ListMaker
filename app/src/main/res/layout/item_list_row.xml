@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:background="#fff"
-    android:elevation="4dp">
-
-    <TextView
-    android:layout_width="match_parent"
+<TextView android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:textSize="24sp"
     android:id="@+id/item_list_textview"
-    />
-    </FrameLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android" />
