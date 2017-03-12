@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         mObjectAdapter = new MainListAdapter(this, R.layout.object_list_row, R.id.object_list_row_textview, mListObjects);
         mRecyclerView.setAdapter(mObjectAdapter);
-        Drawable dividerDrawable = ContextCompat.getDrawable(this, R.drawable.horizontal_divider);
-        RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecoration(dividerDrawable);
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         ItemTouchHelper.Callback callback = new ListItemTouchHelper(mObjectAdapter);
         ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
