@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext=this; //This needs to be declared seperately as it is used in onClickListeners, where the "this" keyword is interpreted by the compiler as refereing to the listener itself.
     private List<ListObject> mListObjects = new ArrayList<ListObject>();
     private RecyclerView.LayoutManager mLayoutManager; //RecyclerViews need a LayoutManager
+    private CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.MainCoordinatorlayout);
         mRecyclerView = (RecyclerView) findViewById(R.id.ListObjectDisplayList);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mObjectAdapter = new MainListAdapter(this, R.layout.object_list_row, R.id.object_list_row_textview, mListObjects);
+        mObjectAdapter =  new MainListAdapter(this, R.layout.object_list_row, R.id.object_list_row_textview, mListObjects,mCoordinatorLayout);
         mRecyclerView.setAdapter(mObjectAdapter);
 
         ItemTouchHelper.Callback callback = new ListItemTouchHelper(mObjectAdapter);
@@ -72,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
                 })
         );
+
+
 
     }
 
@@ -150,5 +155,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Test",Integer.toString(k)+" "+ mListObjects.get(k).getListObjectName() + " " + Integer.toString(mListObjects.get(k).getUniqueID()));
         }
     }
+
 
 }

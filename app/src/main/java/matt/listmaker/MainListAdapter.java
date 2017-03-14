@@ -2,6 +2,8 @@ package matt.listmaker;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,13 +32,15 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
     int layoutResourceId;
     List<ListObject> data = null;
     private ListDBHelper dbHelper;
+    private CoordinatorLayout mCoordinatorLayout;
 
-
-    public MainListAdapter(Context context, int layoutResourceId, int textlayoutResourceId,  List<ListObject> data) {
+    public MainListAdapter(Context context, int layoutResourceId, int textlayoutResourceId,  List<ListObject> data,CoordinatorLayout pCoordinatorLayout) {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
         dbHelper= new ListDBHelper(context);
+        mCoordinatorLayout=pCoordinatorLayout; //I can't shake the feeling that this could be derived directly from the already passed context and that it might be simpler than this
+
         //vListItem.setOnClickListener(this);
     }
     // Create new views (invoked by the layout manager)
@@ -85,6 +89,16 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.MainAd
         dbHelper.removeListObject(data.get(position).getUniqueID());
         data.remove(position);
         notifyItemRemoved(position);
+        Snackbar snackbar = Snackbar
+                .make(mCoordinatorLayout, "List Deleted!", Snackbar.LENGTH_LONG)
+                .setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar snackbar1 = Snackbar.make(mCoordinatorLayout, "List restored!", Snackbar.LENGTH_SHORT);
+                        snackbar1.show();
+                    }
+                });
+        snackbar.show();
     }
 
     @Override
